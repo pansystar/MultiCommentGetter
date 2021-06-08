@@ -1,7 +1,8 @@
 <?php
-
     namespace Win;
 
+    require_once("WinUtility.php");
+    
     use SQLite3;
     /**
      * @brief Win版Chromeユーティリティクラス
