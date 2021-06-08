@@ -28,17 +28,23 @@
      */
     class ChromeProfile {
         private $profileName = "Default";
+        private $tempCookiesFilePath = "";
+
+        function __construct() {
+            $this->tempCookiesFilePath = WinUtility::GetTempFilePath();
+            copy($this->GetCookiesFilePath(), $this->tempCookiesFilePath);
+        }
+
         public function GetCookiesFilePath() {
             return ChromeUtility::GetUserDataFolderPath() . $this->profileName . "\\Cookies";
         }
-        public function CreateTempCookiesFile() {
-            $tempFilePath = WinUtility::GetTempFilePath();
-            copy($this->GetCookiesFilePath(), $tempFilePath);
+
+        public function GetTempCookiesFilePath() {
+            return $this->tempCookiesFilePath;
         }
     }
 
     $profile = new ChromeProfile();
-    $profile->CreateTempCookiesFile();
     
     // TODO: Cookieを一時ファイルにコピーしてから以下の処理をする。
     // $sqlite = new SQLite3("Cookies");
