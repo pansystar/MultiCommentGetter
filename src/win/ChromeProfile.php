@@ -35,7 +35,7 @@
             copy($this->GetCookiesFilePath(), $this->tempCookiesFilePath);
         }
 
-        public function GetCookiesFilePath() {
+        private function GetCookiesFilePath() {
             return ChromeUtility::GetUserDataFolderPath() . $this->profileName . "\\Cookies";
         }
 
