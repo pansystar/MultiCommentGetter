@@ -45,9 +45,7 @@
     }
 
     $profile = new ChromeProfile();
-    
-    // TODO: Cookieを一時ファイルにコピーしてから以下の処理をする。
-    // $sqlite = new SQLite3("Cookies");
-    // $q = $sqlite->query("SELECT value, name, host_key, path, expires_utc, encrypted_value FROM cookies WHERE host_key LIKE '%youtube.com'");
-   
+
+    $sqlite = new SQLite3($profile->GetTempCookiesFilePath());
+    $q = $sqlite->query("SELECT value, name, host_key, path, expires_utc, encrypted_value FROM cookies WHERE host_key LIKE '%youtube.com'");
 ?>
