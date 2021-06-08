@@ -28,14 +28,18 @@
      */
     class ChromeProfile {
         private $profileName = "Default";
-        public function GetCookiesFolderPath() {
+        public function GetCookiesFilePath() {
             return ChromeUtility::GetUserDataFolderPath() . $this->profileName . "\\Cookies";
+        }
+        public function CreateTempCookiesFile() {
+            $tempFilePath = WinUtility::GetTempFilePath();
+            copy($this->GetCookiesFilePath(), $tempFilePath);
         }
     }
 
     $profile = new ChromeProfile();
-    echo $profile->GetCookiesFolderPath();
-
+    $profile->CreateTempCookiesFile();
+    
     // TODO: Cookieを一時ファイルにコピーしてから以下の処理をする。
     // $sqlite = new SQLite3("Cookies");
     // $q = $sqlite->query("SELECT value, name, host_key, path, expires_utc, encrypted_value FROM cookies WHERE host_key LIKE '%youtube.com'");
